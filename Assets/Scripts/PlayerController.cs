@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private RayCastMove ray;
     public bool smoothTransition = false;
     public float transitionSpeed = 10f;
     public float transitionRotationSpeed = 500f;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        this.ray = GetComponent<RayCastMove>();
         targetGridPosition = Vector3Int.RoundToInt(transform.position);
     }
 
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
     
     void MovePlayer() 
     {
-        if (Mathf.RoundToInt(targetGridPosition.x) % 2 == 0 || Mathf.RoundToInt(targetGridPosition.z) % 2 == 0)
+        if (true)
         {
             prevTargetGridPosition = targetGridPosition;
             Vector3 targetPosition = targetGridPosition;
@@ -51,10 +53,10 @@ public class PlayerController : MonoBehaviour
 
     public void RotateLeft() { if (AtRest) targetRotation -= Vector3.up * 90f; }
     public void RotateRight() { if (AtRest) targetRotation += Vector3.up * 90f; }
-    public void MoveForward() { if (AtRest) targetGridPosition += transform.forward; }
-    public void MoveBackwards() { if (AtRest) targetGridPosition -= transform.forward; }
-    public void MoveLeft() { if (AtRest) targetGridPosition -= transform.right; }
-    public void MoveRight() { if (AtRest) targetGridPosition += transform.right; }
+    public void MoveForward() { if (AtRest && ray.CanMove(Vector3.forward)) targetGridPosition += transform.forward; }
+    public void MoveBackwards() { if (AtRest && ray.CanMove(Vector3.forward * -1)) targetGridPosition -= transform.forward; }
+    public void MoveLeft() { if (AtRest && ray.CanMove(Vector3.right * -1)) targetGridPosition -= transform.right; }
+    public void MoveRight() { if (AtRest && ray.CanMove(Vector3.right)) targetGridPosition += transform.right; }
 
 
     bool AtRest {
