@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public float attackSpeed = 1f;
 
     // Parry
+    public bool isParrying;
     public float parrySpeed = 3f;
     public float parryDuration = 1f;
     private bool canTakeDamage = true;

@@ -13,7 +13,6 @@ public class CharacterCombat : MonoBehaviour
     // Parrying
     private float parryCooldown;
     private float parryTimer;
-    public bool isParrying;
     public bool canParry = true;
 
     // Start is called before the first frame update
@@ -40,7 +39,7 @@ public class CharacterCombat : MonoBehaviour
             }
         }
 
-        if (isParrying)
+        if (currentCharacter.isParrying)
         {
             Debug.Log("PARRY");
             parryTimer += Time.deltaTime;
@@ -57,9 +56,18 @@ public class CharacterCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            targetCharacter.TakeDamage(currentCharacter.attackDamage);
-            attackCooldown = 1 / currentCharacter.attackSpeed;
-            canAttack = false;
+            if (targetCharacter.isParrying)
+            {
+                GotParried();
+                SuccessfulParry(targetCharacter);
+                Debug.Log("Enemy got Parried!!!!");
+            }
+            else
+            {
+                targetCharacter.TakeDamage(currentCharacter.attackDamage);
+                attackCooldown = 1 / currentCharacter.attackSpeed;
+                canAttack = false;
+            }
         }
     }
 
@@ -68,19 +76,36 @@ public class CharacterCombat : MonoBehaviour
         Debug.Log("Can't parry yet");
         if (canParry)
         {
-            Debug.Log("Started parrying");
-            currentCharacter.CanTakeDamage(false);
-            isParrying = true;
+            currentCharacter.isParrying = true;
         }
     }
 
     public void StopMeleeParry(Character currentCharacter)
     {
-        Debug.Log("Stopped parrying");
-        currentCharacter.CanTakeDamage(true);
         parryCooldown = currentCharacter.parrySpeed;
         parryTimer = 0f;
         canParry = false;
-        isParrying = false;
+        currentCharacter.isParrying = false;
     }
+
+
+    /// <summary>
+    /// Stops attack from attacker, and takes damage according to current attack damage. Gets double attack cooldown on next attack.
+    /// </summary>
+    public void GotParried()
+    {
+        currentCharacter.TakeDamage(currentCharacter.attackDamage);
+        attackCooldown = 2 * (1 / currentCharacter.attackSpeed);
+        canAttack = false;
+    }
+
+    /// <summary>
+    /// If character gets a successfull parry, character gets a new attack instantly. 
+    /// </summary>
+    public void SuccessfulParry(Character targetCharacter)
+    {
+        targetCharacter.GetComponentInParent<CharacterCombat>().canAttack = true;
+        targetCharacter.GetComponentInParent<CharacterCombat>().attackCooldown = 0f;
+    }
+
 }
