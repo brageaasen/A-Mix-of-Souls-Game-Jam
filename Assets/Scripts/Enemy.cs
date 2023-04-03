@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     GameObject player;
     Character playerCharacter;
     CharacterCombat playerCombat;
+    PlayerInput playerInput;
 
     Character currentCharacter;
     CharacterCombat enemyCombat;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
         player = PlayerManager.instance.player;
         playerCharacter = PlayerManager.instance.player.GetComponent<Character>();
         playerCombat = PlayerManager.instance.player.GetComponent<CharacterCombat>();
+        playerInput = PlayerManager.instance.player.GetComponent<PlayerInput>();
 
         currentCharacter = GetComponent<Character>();
         enemyCombat = GetComponent<CharacterCombat>();
@@ -31,9 +33,8 @@ public class Enemy : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         
-        if (Input.GetKeyDown(KeyCode.K)) // Testing
+        if (Input.GetKeyDown(playerInput.attack))
         {
-
             if (distance <= radius)
             {
                 if (playerCombat != null)
@@ -46,7 +47,7 @@ public class Enemy : MonoBehaviour
             enemyCombat.MeleeAttack(playerCharacter);
         }
     }
-
+    
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

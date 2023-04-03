@@ -8,8 +8,17 @@ public class Character : MonoBehaviour
     public int maxHealth;
     public HealthBar healthBar;
 
+    [Header ("Combat")]
+    // Attack
     public int attackDamage;
     public float attackSpeed = 1f;
+
+    // Parry
+    public float parrySpeed = 3f;
+    public float parryDuration = 1f;
+    private bool canTakeDamage = true;
+
+
 
     public bool isDead;
 
@@ -21,8 +30,16 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        CheckHealth();
+        if (canTakeDamage)
+        {
+            currentHealth -= damage;
+            CheckHealth();
+        }
+    }
+
+    public void CanTakeDamage(bool canTakeDamage)
+    {
+        this.canTakeDamage = canTakeDamage;
     }
 
     public void CheckHealth()
@@ -30,8 +47,7 @@ public class Character : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            isDead = true;
-            //Die();
+            Die();
         }
         if (currentHealth >= maxHealth)
         {
@@ -39,5 +55,15 @@ public class Character : MonoBehaviour
         }
 
         healthBar.SetHealth(currentHealth);
+    }
+
+    public void Die()
+    {
+        this.isDead = true;
+
+        if (GetComponent<Enemy>() != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }
