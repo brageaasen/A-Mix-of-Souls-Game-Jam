@@ -6,15 +6,17 @@ public class Character : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
+    public HealthBar healthBar;
 
     public int attackDamage;
     public float attackSpeed = 1f;
 
-    private bool isDead;
+    public bool isDead;
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(int damage)
@@ -35,5 +37,7 @@ public class Character : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        healthBar.SetHealth(currentHealth);
     }
 }
