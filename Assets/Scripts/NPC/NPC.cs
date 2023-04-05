@@ -14,6 +14,8 @@ public class NPC : MonoBehaviour
     private int index = 0;
 
     private GameObject player;
+    private RayCastMove ray;
+    private PlayerController playerController;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -26,45 +28,38 @@ public class NPC : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         dialogueText.text = "";
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = PlayerManager.instance.player;
+        ray = player.GetComponent<RayCastMove>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && playerIsClose)
+        if (Input.GetKeyDown(KeyCode.R) && ray.LookingAt() == "Angel")
         {
+            playerController.canMove = false;
             if (!dialoguePanel.activeInHierarchy)
             {
-                //audioManager.Play("Click");
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
             else if (dialogueText.text == dialogue[index])
             {
-                //audioManager.Play("Click");
                 NextLine();
             }
         }
 
-        // Speed up dialogue
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    wordSpeed /= 4;
-        //} else if (Input.GetKeyUp(KeyCode.R))
-        //{
-        //    wordSpeed *= 4;
-        //}
-
-        // Quit dialogue
-        if (Input.GetKeyDown(KeyCode.T) && dialoguePanel.activeInHierarchy)
+        if (!(ray.LookingAt() == "Angel"))
         {
             RemoveText();
-        }        
+            index = 0;
+        }
     }
 
     public void RemoveText()
     {
+        playerController.canMove = true;
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
@@ -89,26 +84,6 @@ public class NPC : MonoBehaviour
             StartCoroutine(Typing());
         }
         else
-        {
             RemoveText();   
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerIsClose = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerIsClose = false;
-            RemoveText();
-            index = 0;
-        }
     }
 }

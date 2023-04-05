@@ -9,68 +9,58 @@ public class Fader : MonoBehaviour
     [SerializeField] private string fadeText;
 
     private float fadeTime;
-    private bool fading;
+    private bool fadedIn;
+    public bool canFade = true;
+
+    private GameObject player;
+    private RayCastMove ray;
 
     // Start is called before the first frame update
     void Start()
     {
         this.text.CrossFadeAlpha(0, 0.0f, false);
         this.fadeTime = 0f;
-        this.fading = false;
+        this.fadedIn = false;
+
+        this.player = PlayerManager.instance.player;
+        this.ray = player.GetComponent<RayCastMove>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void FadeIn()
-    {
-        this.text.CrossFadeAlpha(1, 0.5f, false);
-        this.fadeTime += Time.deltaTime;
-
-        if (this.text.color.a == 1 && this.fadeTime > 1.5f)
+        if (ray.LookingAt() == this.tag && !fadedIn && canFade)
         {
-            this.fading = false;
-            this.fadeTime = 0f;
-        }
-    }
-
-    void FadeOut()
-    {
-        this.text.CrossFadeAlpha(0, 0.5f, false);
-        this.fadeTime += Time.deltaTime;
-
-        //this.text.CrossFadeAlpha(0, 0.5f, false);  
-
-        if (this.text.color.a == 0 && this.fadeTime > 1.5f)
-        {
-            this.fading = false;
-            this.fadeTime = 0f;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            this.fading = true;
-
             // Text to be displayed
             this.text.text = this.fadeText;
 
             FadeIn();
         }
+        else if (!(ray.LookingAt() == this.tag) && fadedIn)
+            FadeOut();
     }
 
-    // Fade out
-    void OnTriggerExit(Collider other)
+    public void FadeIn()
     {
-        if (other.tag == "Player")
+        this.fadedIn = true;
+        this.text.CrossFadeAlpha(1, 0.5f, false);
+        this.fadeTime += Time.deltaTime;
+
+        if (this.text.color.a == 1 && this.fadeTime > 1.5f)
         {
-            this.fading = true;
-            FadeOut();
+            this.fadeTime = 0f;
+        }
+    }
+
+    public void FadeOut()
+    {
+        this.fadedIn = false;
+        this.text.CrossFadeAlpha(0, 0.5f, false);
+        this.fadeTime += Time.deltaTime;
+
+        if (this.text.color.a == 0 && this.fadeTime > 1.5f)
+        {
+            this.fadeTime = 0f;
         }
     }
 }

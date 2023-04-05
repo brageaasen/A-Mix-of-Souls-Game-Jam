@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float transitionSpeed = 10f;
     public float transitionRotationSpeed = 500f;
 
+    public bool canMove = true;
+
     Vector3 targetGridPosition;
     Vector3 prevTargetGridPosition;
     Vector3 targetRotation;
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
     
     void MovePlayer() 
     {
-        if (true)
+        if (canMove)
         {
             prevTargetGridPosition = targetGridPosition;
             Vector3 targetPosition = targetGridPosition;

@@ -16,9 +16,12 @@ public class CharacterCombat : MonoBehaviour
     private float parryTimer;
     public bool canParry = true;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         currentCharacter = GetComponent<Character>();
     }
 
@@ -65,6 +68,11 @@ public class CharacterCombat : MonoBehaviour
             }
             else
             {
+                if (targetCharacter.tag == "Player")
+                    audioManager.Play("Enemy");
+                else
+                    audioManager.Play("Attack");
+                
                 targetCharacter.TakeDamage(currentCharacter.attackDamage);
                 attackCooldown = 1 / currentCharacter.attackSpeed;
                 canAttack = false;
@@ -114,6 +122,7 @@ public class CharacterCombat : MonoBehaviour
     /// </summary>
     public void SuccessfulParry(Character targetCharacter)
     {
+        audioManager.Play("Parry");
         targetCharacter.GetComponentInParent<CharacterCombat>().canAttack = true;
         targetCharacter.GetComponentInParent<CharacterCombat>().attackCooldown = 0f;
     }
