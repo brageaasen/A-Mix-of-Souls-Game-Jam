@@ -30,10 +30,9 @@ public class door : MonoBehaviour
 
     private void OnTriggerStay(Collider other) // "Press F to open" UI
     {
-        Debug.Log("Inside");
         if (other.tag == "Player")
         {
-            Debug.Log("Inside");
+            Debug.Log(open);
             if (Input.GetKeyDown(KeyCode.F)) // And player has key
             {
                 OpenDoor();

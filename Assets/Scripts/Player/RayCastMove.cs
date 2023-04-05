@@ -26,12 +26,11 @@ public class RayCastMove : MonoBehaviour
         {
             if (hit.collider.tag == "Environment")
             {
-                Debug.Log("ENVIRONMENT");
                 return false;
             }
             else if (hit.collider.tag == "Enemy")
             {
-                Debug.Log("It's the ENEMY!!!!!");
+                return false;
             }
         }
         return true;

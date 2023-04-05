@@ -187,8 +187,8 @@ MonoBehaviour:
     y: 0
     width: 260
     height: 392
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -226,25 +226,25 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 12f10300
-      m_LastClickedID: 258322
-      m_ExpandedIDs: 7a0be1ffe071e3ff8474e3ff2afbffff30fbffff32fbffff22690000b6f10300a8f503000ef70300
+      m_SelectedIDs: 0afbffff
+      m_LastClickedID: -1270
+      m_ExpandedIDs: 34fbffff766b0000da6d0000406f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Trigger
+        m_OriginalName: Trigger
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 68804
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 7}
+        m_ClientGUIView: {fileID: 5}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -539,9 +539,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.625402, y: 0.51929724, z: 2.333908}
+    m_Target: {x: -0.5084993, y: 2.2509918, z: -0.14166155}
     speed: 2
-    m_Value: {x: 0.625402, y: 0.51929724, z: 2.333908}
+    m_Value: {x: -0.5084993, y: 2.2509918, z: -0.14166155}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -588,13 +588,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.31771097, y: -0.08099888, z: 0.026796984, w: -0.94490886}
+    m_Target: {x: -0.36761975, y: -0.34770188, z: 0.1506586, w: -0.8499272}
     speed: 2
-    m_Value: {x: -0.31754082, y: -0.080955505, z: 0.026782632, w: -0.9444028}
+    m_Value: {x: -0.36741495, y: -0.34750816, z: 0.15057465, w: -0.8494537}
   m_Size:
-    m_Target: 4.7590714
+    m_Target: 1.1497092
     speed: 2
-    m_Value: 4.7590714
+    m_Value: 1.1497092
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -774,22 +774,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/BH DRPG Asset pack/Full resolution/Single tiles and sprites
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/BH DRPG Asset pack/Full resolution/Single tiles and sprites
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Bruker\Desktop\Game-Jam-Hellstroem
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: e8690000
-    m_LastClickedID: 27112
-    m_ExpandedIDs: 00000000ce690000d4690000d6690000de690000e8690000ea690000
+    m_SelectedIDs: 3c720000
+    m_LastClickedID: 29244
+    m_ExpandedIDs: 000000003c720000ce730000e4730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -817,7 +817,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ce690000
+    m_ExpandedIDs: 000000003c720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -842,10 +842,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 12f10300
-    m_LastClickedInstanceID: 258322
+    m_SelectedInstanceIDs: 0afbffff
+    m_LastClickedInstanceID: -1270
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c623000000000000226d0000
+    m_ExpandedInstanceIDs: c6230000226d000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -962,7 +962,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -2030000
+  m_LastSelectedObjectID: 28122
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52

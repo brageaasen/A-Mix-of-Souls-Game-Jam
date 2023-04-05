@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Enemy : MonoBehaviour
     Character currentCharacter;
     CharacterCombat enemyCombat;
     NavMeshAgent navAgent;
+
+    [SerializeField] private Image exclamationMark;
+    public float reactionTime = 1f;
+    [SerializeField] private Image questionMark;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,12 @@ public class Enemy : MonoBehaviour
 
         if (distance <= navAgent.stoppingDistance)
         {
+            if (enemyCombat.attackCooldown < reactionTime)
+                exclamationMark.enabled = true;
+
+            if (!enemyCombat.canAttack || distance >= navAgent.stoppingDistance)
+                Invoke("DisableImage", 0.2f);
+                
             enemyCombat.MeleeAttack(playerCharacter);
         }
     }
@@ -52,5 +63,22 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    void DisableImage()
+    {
+        exclamationMark.enabled = false;
+    }
+
+    public void EnableQuestionMark()
+    {
+        questionMark.enabled = true;
+        questionMark.GetComponent<Animator>().SetBool("IsSpinning", true);
+    }
+
+    public void DisableQuestionMark()
+    {
+        questionMark.enabled = false;
+        questionMark.GetComponent<Animator>().SetBool("IsSpinning", false);
     }
 }

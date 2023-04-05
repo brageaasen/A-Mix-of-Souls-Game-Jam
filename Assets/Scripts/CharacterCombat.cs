@@ -5,10 +5,11 @@ using UnityEngine;
 public class CharacterCombat : MonoBehaviour
 {
     public Character currentCharacter;
+    private Enemy enemy;
 
     // Attacking
     public float attackCooldown;
-    bool canAttack = true;
+    public bool canAttack = true;
 
     // Parrying
     private float parryCooldown;
@@ -54,7 +55,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void MeleeAttack(Character targetCharacter)
     {
-        if (canAttack)
+        if (canAttack && !currentCharacter.isParrying)
         {
             if (targetCharacter.isParrying)
             {
@@ -97,6 +98,15 @@ public class CharacterCombat : MonoBehaviour
         currentCharacter.TakeDamage(currentCharacter.attackDamage);
         attackCooldown = 2 * (1 / currentCharacter.attackSpeed);
         canAttack = false;
+
+        // UI: Questionmark spin over head
+        if (currentCharacter.GetComponent<Enemy>() != null)
+        {
+            Debug.Log("INSIDE PARRY!");
+            enemy = currentCharacter.GetComponent<Enemy>();
+            enemy.EnableQuestionMark();
+            Invoke("InvokeDisableFromEnemy", attackCooldown - enemy.reactionTime);
+        }
     }
 
     /// <summary>
@@ -106,6 +116,11 @@ public class CharacterCombat : MonoBehaviour
     {
         targetCharacter.GetComponentInParent<CharacterCombat>().canAttack = true;
         targetCharacter.GetComponentInParent<CharacterCombat>().attackCooldown = 0f;
+    }
+
+    private void InvokeDisableFromEnemy()
+    {
+        enemy.DisableQuestionMark();
     }
 
 }
