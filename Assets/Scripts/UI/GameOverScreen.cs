@@ -9,12 +9,20 @@ public class GameOverScreen : MonoBehaviour
 
     // Reference
     [SerializeField] private Character player;
-    
+    private PlayerController playerController;
+    [SerializeField] private Timer timer;
+
+    void Start()
+    {
+        playerController = player.GetComponent<PlayerController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (player.isDead)
+        if (player.isDead || (timer.GetTime() <= 0))
         {
+            playerController.canMove = false;
             gameOverMenuUI.SetActive(true);
         }
     }
