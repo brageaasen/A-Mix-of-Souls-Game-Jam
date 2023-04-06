@@ -6,6 +6,10 @@ public class CharacterCombat : MonoBehaviour
 {
     public Character currentCharacter;
     private Enemy enemy;
+    private GameObject player;
+
+    private Inventory inventory;
+    public int potionGain = 40;
 
     // Attacking
     public float attackCooldown;
@@ -22,11 +26,18 @@ public class CharacterCombat : MonoBehaviour
     void Start()
     {
         this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        currentCharacter = GetComponent<Character>();
+        this.currentCharacter = GetComponent<Character>();
+        this.player = PlayerManager.instance.player;
+
+        if (GetComponent<Inventory>() != null)
+            this.inventory = GetComponent<Inventory>();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+            UsePotion(this.player.GetComponent<Character>());
+
         if (!canAttack)
         {
             attackCooldown -= Time.deltaTime;
@@ -45,7 +56,6 @@ public class CharacterCombat : MonoBehaviour
 
         if (currentCharacter.isParrying)
         {
-            Debug.Log("PARRY");
             parryTimer += Time.deltaTime;
             if (parryTimer > currentCharacter.parryDuration)
                 StopMeleeParry(currentCharacter);
@@ -64,7 +74,6 @@ public class CharacterCombat : MonoBehaviour
             {
                 GotParried();
                 SuccessfulParry(targetCharacter);
-                Debug.Log("Enemy got Parried!!!!");
             }
             else
             {
@@ -110,7 +119,6 @@ public class CharacterCombat : MonoBehaviour
         // UI: Questionmark spin over head
         if (currentCharacter.GetComponent<Enemy>() != null)
         {
-            Debug.Log("INSIDE PARRY!");
             enemy = currentCharacter.GetComponent<Enemy>();
             enemy.EnableQuestionMark();
             Invoke("InvokeDisableFromEnemy", attackCooldown - enemy.reactionTime);
@@ -130,6 +138,17 @@ public class CharacterCombat : MonoBehaviour
     private void InvokeDisableFromEnemy()
     {
         enemy.DisableQuestionMark();
+    }
+
+    private void UsePotion(Character player)
+    {
+        if ((this.player.GetComponent<Inventory>().potions > 0) && (player.currentHealth < player.maxHealth))
+        {
+            player.currentHealth += potionGain;
+            player.CheckHealth();
+            this.player.GetComponent<Inventory>().DecrementCount("Potion");
+            audioManager.Play("UsePotion");
+        }
     }
 
 }

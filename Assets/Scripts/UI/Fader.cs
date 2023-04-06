@@ -33,7 +33,8 @@ public class Fader : MonoBehaviour
         if (ray.LookingAt() == this.tag && !fadedIn && canFade)
         {
             // Text to be displayed
-            this.text.text = this.fadeText;
+            if (ray.LookingAtGameObject().GetComponent<Fader>() != null)
+                ray.LookingAtGameObject().GetComponent<Fader>().text.text = this.fadeText;
 
             FadeIn();
         }

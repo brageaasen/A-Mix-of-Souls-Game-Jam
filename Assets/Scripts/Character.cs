@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [SerializeField] private CameraShake cameraShake;
+
     public int currentHealth;
     public int maxHealth;
     public HealthBar healthBar;
@@ -33,6 +35,9 @@ public class Character : MonoBehaviour
     {
         if (canTakeDamage)
         {
+            if (this.gameObject.tag == "Player")
+                StartCoroutine(cameraShake.Shake(.15f, .05f));
+                
             currentHealth -= damage;
             CheckHealth();
         }

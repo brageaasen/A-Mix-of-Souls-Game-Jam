@@ -39,7 +39,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && (ray.LookingAt() == "Angel") && this.canTalk)
+        if (Input.GetKeyDown(KeyCode.F) && (ray.LookingAt() == "Angel") && this.canTalk)
         {
             playerController.canMove = false;
             if (!dialoguePanel.activeInHierarchy)
