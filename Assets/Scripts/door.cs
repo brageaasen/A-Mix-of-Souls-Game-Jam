@@ -29,7 +29,13 @@ public class Door : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F)) // And player has key
             {
-                ray.LookingAtGameObject().GetComponent<Door>().OpenDoor();
+                if (player.GetComponent<Inventory>().keys > 0)
+                {
+                    ray.LookingAtGameObject().GetComponent<Door>().OpenDoor();
+                    player.GetComponent<Inventory>().DecrementCount("Key");
+                }
+                else
+                    audioManager.Play("DoorLocked"); // Locked sound effect
             }
         }
     }

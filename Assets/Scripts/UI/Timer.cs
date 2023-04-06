@@ -13,13 +13,11 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!timerStarted)
-            return;
-        if (timeValue > 0)
+        if (timeValue > 0 && timerStarted)
         {
             timeValue -= Time.deltaTime;
         }
-        else
+        else if (timerStarted)
         {
             timeValue = 0;
         }
@@ -47,6 +45,7 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
+        Debug.Log("Started timer");
         this.timerStarted = true;
     }
 }

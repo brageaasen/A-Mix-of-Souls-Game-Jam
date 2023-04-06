@@ -57,6 +57,8 @@ public class NPC : MonoBehaviour
     public void RemoveText()
     {
         timer.StartTimer();
+        this.canTalk = false;
+        player.GetComponent<Inventory>().IncrementCount("Key");
         playerController.canMove = true;
         dialogueText.text = "";
         index = 0;

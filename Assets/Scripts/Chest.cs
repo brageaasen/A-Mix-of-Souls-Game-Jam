@@ -62,7 +62,6 @@ public class Chest : MonoBehaviour
         if (containsIndex++ < contains.Length - 1)
         {
             this.inventory.IncrementCount(contains[containsIndex]);
-            this.audioManager.Play("PickUp");
             Invoke("delayPickUp", delay);
         }
         else

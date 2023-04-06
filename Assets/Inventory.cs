@@ -22,11 +22,13 @@ public class Inventory : MonoBehaviour
         {
             keys++;
             textKeys.text = keys.ToString();
+            this.audioManager.Play("PickUp");
         }
         else if (str == "Potion")
         {
             potions++;
             textPotions.text = potions.ToString();
+            this.audioManager.Play("PickUp");
         }
     }
     public void DecrementCount(string str)
