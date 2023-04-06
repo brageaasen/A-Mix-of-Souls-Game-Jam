@@ -6,7 +6,7 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private Timer timer;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public string[] dialogue;
@@ -19,6 +19,9 @@ public class NPC : MonoBehaviour
 
     public float wordSpeed;
     public bool playerIsClose;
+
+    public bool canBeCollected = true;
+    public bool canTalk;
 
     private AudioManager audioManager;
 
@@ -36,7 +39,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && ray.LookingAt() == "Angel")
+        if (Input.GetKeyDown(KeyCode.R) && (ray.LookingAt() == "Angel") && this.canTalk)
         {
             playerController.canMove = false;
             if (!dialoguePanel.activeInHierarchy)
@@ -49,16 +52,11 @@ public class NPC : MonoBehaviour
                 NextLine();
             }
         }
-
-        if (!(ray.LookingAt() == "Angel"))
-        {
-            RemoveText();
-            index = 0;
-        }
     }
 
     public void RemoveText()
     {
+        timer.StartTimer();
         playerController.canMove = true;
         dialogueText.text = "";
         index = 0;

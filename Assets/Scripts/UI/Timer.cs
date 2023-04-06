@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
     public float timeValue = 90f;
-    public Text timeText;
+    public TextMeshProUGUI timeText;
     private bool timerStarted;
 
     // Update is called once per frame
     void Update()
     {
-        if (timeValue > 0 && timerStarted)
+        if (!timerStarted)
+            return;
+        if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
         }

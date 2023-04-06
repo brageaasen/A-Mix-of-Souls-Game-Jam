@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Fader : MonoBehaviour
 {
-    public Text text;
+    public TextMeshProUGUI text;
     [SerializeField] private string fadeText;
 
     private float fadeTime;
