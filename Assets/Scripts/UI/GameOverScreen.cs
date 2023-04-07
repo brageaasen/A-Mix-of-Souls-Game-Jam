@@ -11,10 +11,12 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private Character player;
     private PlayerController playerController;
     [SerializeField] private Timer timer;
+    private AudioManager audioManager;
 
     void Start()
     {
         playerController = player.GetComponent<PlayerController>();
+        this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -25,5 +27,10 @@ public class GameOverScreen : MonoBehaviour
             playerController.canMove = false;
             gameOverMenuUI.SetActive(true);
         }
+    }
+
+    public void PlaySelectSound()
+    {
+         audioManager.Play("Select");
     }
 }

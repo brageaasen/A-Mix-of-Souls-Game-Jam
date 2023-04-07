@@ -18,7 +18,7 @@ public class CharacterCombat : MonoBehaviour
     // Parrying
     private float parryCooldown;
     private float parryTimer;
-    public bool canParry = true;
+    public bool canParry;
 
     private AudioManager audioManager;
 
@@ -45,7 +45,7 @@ public class CharacterCombat : MonoBehaviour
                 canAttack = true;
         }
 
-        if (!canParry)
+        if (!canParry && currentCharacter.tag == "Player")
         {
             parryCooldown -= Time.deltaTime;
             if (parryCooldown <= 0f)
@@ -54,7 +54,7 @@ public class CharacterCombat : MonoBehaviour
             }
         }
 
-        if (currentCharacter.isParrying)
+        if (currentCharacter.isParrying && currentCharacter.tag == "Player")
         {
             parryTimer += Time.deltaTime;
             if (parryTimer > currentCharacter.parryDuration)
@@ -144,7 +144,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if ((this.player.GetComponent<Inventory>().potions > 0) && (player.currentHealth < player.maxHealth))
         {
-            player.currentHealth += potionGain;
+            player.currentHealth += 40; // Change to variable potionGain
             player.CheckHealth();
             this.player.GetComponent<Inventory>().DecrementCount("Potion");
             audioManager.Play("UsePotion");

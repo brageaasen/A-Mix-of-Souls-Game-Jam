@@ -11,6 +11,12 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
 
     [SerializeField] private GameObject gameOverMenuUI;
+    private AudioManager audioManager;
+
+    void Start()
+    {
+        this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,6 +34,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void PlaySelectSound()
+    {
+         audioManager.Play("Select");
+    }
+    
     public void Resume()
     {
         pauseMenuUI.SetActive(false);

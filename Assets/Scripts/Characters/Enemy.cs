@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         currentCharacter = GetComponent<Character>();
         enemyCombat = GetComponent<CharacterCombat>();
         navAgent = GetComponent<NavMeshAgent>();
+        navAgent.stoppingDistance = this.radius;
     }
 
     // Update is called once per frame

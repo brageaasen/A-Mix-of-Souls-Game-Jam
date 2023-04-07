@@ -748,10 +748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCharacter: {fileID: 795445707163303988}
-  potionGain: 40
+  potionGain: 0
   attackCooldown: 0
   canAttack: 1
-  canParry: 1
+  canParry: 0
 --- !u!114 &795445707163303986
 MonoBehaviour:
   m_ObjectHideFlags: 0
