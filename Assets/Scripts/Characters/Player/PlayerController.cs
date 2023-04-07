@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private RayCastMove ray;
-    public bool smoothTransition = false;
+    public bool smoothTransitions = true;
     public float transitionSpeed = 10f;
     public float transitionRotationSpeed = 500f;
 
@@ -19,10 +19,34 @@ public class PlayerController : MonoBehaviour
     {
         this.ray = GetComponent<RayCastMove>();
         targetGridPosition = Vector3Int.RoundToInt(transform.position);
+
+        if (PlayerPrefs.HasKey("SmoothTransitionsSelected"))
+        {
+            if (PlayerPrefs.GetInt("SmoothTransitionsSelected") == 1)
+            {
+                smoothTransitions = true;
+            }
+            else if (PlayerPrefs.GetInt("SmoothTransitionsSelected") == 0)
+            {
+                smoothTransitions = false;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        if (PlayerPrefs.HasKey("SmoothTransitionsSelected"))
+        {
+            if (PlayerPrefs.GetInt("SmoothTransitionsSelected") == 1)
+            {
+                smoothTransitions = true;
+            }
+            else if (PlayerPrefs.GetInt("SmoothTransitionsSelected") == 0)
+            {
+                smoothTransitions = false;
+            }
+        }
+        
         MovePlayer();
     }
     
@@ -36,7 +60,7 @@ public class PlayerController : MonoBehaviour
             if (targetRotation.y > 270f && targetRotation.y < 361f) targetRotation.y = 0f;
             if (targetRotation.y < 0f) targetRotation.y = 270f;
 
-            if (!smoothTransition)
+            if (!smoothTransitions)
             {
                 transform.position = targetPosition;
                 transform.rotation = Quaternion.Euler(targetRotation);

@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ece72cfc8e29b94aa418c27f1b73cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 1.2
   exclamationMark: {fileID: 795445706841282074}
   reactionTime: 1
   questionMark: {fileID: 795445706752926910}

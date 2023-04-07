@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
 
     [SerializeField] private GameObject gameOverMenuUI;
+    [SerializeField] private GameObject optionsMenuUI;
     private AudioManager audioManager;
 
     void Start()
@@ -21,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameOverMenuUI.activeSelf == false))
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameOverMenuUI.activeSelf == false) && ((gameOverMenuUI.activeSelf == false)))
         {
             if (GameIsPaused) 
             {
@@ -38,7 +39,7 @@ public class PauseMenu : MonoBehaviour
     {
          audioManager.Play("Select");
     }
-    
+
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
