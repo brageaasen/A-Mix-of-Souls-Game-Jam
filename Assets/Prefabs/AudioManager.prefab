@@ -48,7 +48,7 @@ MonoBehaviour:
   sounds:
   - name: Talk
     clip: {fileID: 8300000, guid: 79e7bbd76a8f2c947bced78a2bce5af1, type: 3}
-    volume: 1
+    volume: 0.6
     volumeVariance: 0.5
     pitch: 1
     pitchVariance: 0
@@ -134,5 +134,23 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: MusicGame
+    clip: {fileID: 8300000, guid: ce0decc4f787fd94882156277d21d488, type: 3}
+    volume: 0.3
+    volumeVariance: 0.3
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: MusicMenu
+    clip: {fileID: 8300000, guid: d8b6c31b938e3db46826b46002338b62, type: 3}
+    volume: 0.3
+    volumeVariance: 0.3
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}

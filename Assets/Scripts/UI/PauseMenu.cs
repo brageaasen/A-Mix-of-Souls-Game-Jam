@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     public static bool GameIsPaused = false;
+    private bool canPause = true;
 
     public GameObject pauseMenuUI;
 
@@ -23,7 +24,10 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameOverMenuUI.activeSelf == false) && ((gameOverMenuUI.activeSelf == false)))
+        if (NPC != null)
+            canPause = !NPC.GetComponent<NPC>().isTalking;
+
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameOverMenuUI.activeSelf == false) && ((gameOverMenuUI.activeSelf == false)) && canPause)
         {
             if (GameIsPaused) 
             {
@@ -44,8 +48,9 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        if (NPC.GetComponent<NPC>().isTalking)
-            dialoguePanelUI.SetActive(true);
+        if (NPC != null)
+            if (NPC.GetComponent<NPC>().isTalking)
+                dialoguePanelUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
