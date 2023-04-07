@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -31,6 +32,12 @@ public class AudioManager : MonoBehaviour
 
 			s.source.outputAudioMixerGroup = mixerGroup;
 		}
+	}
+
+	void Start()
+	{
+		if (SceneManager.GetActiveScene().name == "MainMenu")
+			Play("MusicMenu");
 	}
 
 	public void Play(string sound)

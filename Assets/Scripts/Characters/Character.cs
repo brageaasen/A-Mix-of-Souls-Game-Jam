@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     public bool isParrying;
     public float parrySpeed = 3f;
     public float parryDuration = 1f;
-    private bool canTakeDamage = true;
+    public bool canTakeDamage = true;
 
 
 

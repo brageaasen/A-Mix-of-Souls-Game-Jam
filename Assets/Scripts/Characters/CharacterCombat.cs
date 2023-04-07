@@ -16,7 +16,7 @@ public class CharacterCombat : MonoBehaviour
     public bool canAttack = true;
 
     // Parrying
-    private float parryCooldown;
+    public float parryCooldown;
     private float parryTimer;
     public bool canParry;
 
@@ -45,7 +45,7 @@ public class CharacterCombat : MonoBehaviour
                 canAttack = true;
         }
 
-        if (!canParry && currentCharacter.tag == "Player")
+        if (!canParry && currentCharacter.tag == "Player" && !currentCharacter.isParrying)
         {
             parryCooldown -= Time.deltaTime;
             if (parryCooldown <= 0f)
@@ -91,9 +91,9 @@ public class CharacterCombat : MonoBehaviour
 
     public void StartMeleeParry(Character currentCharacter)
     {
-        Debug.Log("Can't parry yet");
         if (canParry)
         {
+            canParry = false;
             currentCharacter.isParrying = true;
         }
     }

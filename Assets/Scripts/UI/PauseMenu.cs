@@ -11,7 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
 
     [SerializeField] private GameObject gameOverMenuUI;
-    [SerializeField] private GameObject optionsMenuUI;
+    [SerializeField] private GameObject dialoguePanelUI;
+    [SerializeField] private GameObject NPC;
     private AudioManager audioManager;
 
     void Start()
@@ -43,6 +44,8 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        if (NPC.GetComponent<NPC>().isTalking)
+            dialoguePanelUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -50,6 +53,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
+        dialoguePanelUI.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

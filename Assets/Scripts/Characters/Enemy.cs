@@ -37,6 +37,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player.GetComponent<Character>().canTakeDamage)
+        {
+            this.GetComponent<CharacterCombat>().canAttack = false;
+            this.GetComponent<CharacterCombat>().attackCooldown = 500f;
+
+        }
+
         float distance = Vector3.Distance(transform.position, player.transform.position);
         
         if (Input.GetKeyDown(playerInput.attack))

@@ -48,4 +48,9 @@ public class Timer : MonoBehaviour
         Debug.Log("Started timer");
         this.timerStarted = true;
     }
+
+    public void StopTimer()
+    {
+        this.timerStarted = false;
+    }
 }

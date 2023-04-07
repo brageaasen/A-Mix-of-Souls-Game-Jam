@@ -22,6 +22,7 @@ public class NPC : MonoBehaviour
 
     public bool canBeCollected = true;
     public bool canTalk;
+    public bool isTalking;
 
     private AudioManager audioManager;
 
@@ -44,6 +45,7 @@ public class NPC : MonoBehaviour
             playerController.canMove = false;
             if (!dialoguePanel.activeInHierarchy)
             {
+                this.isTalking = true;
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
@@ -56,8 +58,11 @@ public class NPC : MonoBehaviour
 
     public void RemoveText()
     {
+        audioManager.Play("MusicGame");
         timer.StartTimer();
+        this.isTalking = false;
         this.canTalk = false;
+        this.canBeCollected = true;
         player.GetComponent<Inventory>().IncrementCount("Key");
         playerController.canMove = true;
         dialogueText.text = "";
