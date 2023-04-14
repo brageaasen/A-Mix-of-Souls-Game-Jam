@@ -10,7 +10,6 @@ public class NPC : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public string[] dialogue;
-    public string[] dialogue2;
     private int index = 0;
 
     private GameObject player;
@@ -21,8 +20,7 @@ public class NPC : MonoBehaviour
     public bool playerIsClose;
 
     public bool canBeCollected = true;
-    public bool canTalk;
-    public bool isTalking;
+    public bool canTalk, isTalking, skipDialogue;
 
     private AudioManager audioManager;
 
@@ -49,9 +47,12 @@ public class NPC : MonoBehaviour
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
-            else if (dialogueText.text == dialogue[index])
+            else
             {
-                NextLine();
+                if (this.dialogueText.text != dialogue[index])
+                    skipDialogue = true;
+                if (this.dialogueText.text == dialogue[index])
+                    NextLine();
             }
         }
     }
@@ -74,6 +75,12 @@ public class NPC : MonoBehaviour
     {
         foreach(char letter in dialogue[index].ToCharArray())
         {
+            if (skipDialogue)
+            {
+                this.dialogueText.text = dialogue[index];
+                skipDialogue = false;
+                break;
+            }
             audioManager.Play("Talk");
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
@@ -85,10 +92,10 @@ public class NPC : MonoBehaviour
         if (index < dialogue.Length - 1)
         {
             index++;
-            dialogueText.text = "";
+            this.dialogueText.text = "";
             StartCoroutine(Typing());
         }
-        else
+        else 
             RemoveText();   
     }
 }
