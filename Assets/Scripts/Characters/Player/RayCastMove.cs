@@ -7,11 +7,6 @@ public class RayCastMove : MonoBehaviour
 
     public float range = 5f;
 
-    void Start()
-    {
-        
-    }
-    // Start is called before the first frame update
     void Update()
     {
         LookingAt();

@@ -6,6 +6,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private CameraShake cameraShake;
 
+    [Header ("Stats")]
     public int currentHealth;
     public int maxHealth;
     public HealthBar healthBar;

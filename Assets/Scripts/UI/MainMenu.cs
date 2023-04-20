@@ -11,9 +11,7 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-    }
-    void Start()
-    {
+        this.audioManager.StopPlaying("MusicGame");
 		if (SceneManager.GetActiveScene().name == "MainMenu")
 			this.audioManager.Play("MusicMenu");
     }
@@ -22,6 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         audioManager.Play("Select");
     }
+    
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

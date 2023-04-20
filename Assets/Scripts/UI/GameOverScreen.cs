@@ -26,10 +26,9 @@ public class GameOverScreen : MonoBehaviour
         {
             playerController.canMove = false;
             player.CanTakeDamage(false);
-            player.GetComponent<CharacterCombat>().canAttack = false; // Temporary bad solution to non attack mode for user when game end
-            player.GetComponent<CharacterCombat>().attackCooldown = 500f;
+            player.GetComponent<CharacterCombat>().enabled = false;
+            player.GetComponent<CharacterCombat>().canAttack = false;
             player.GetComponent<CharacterCombat>().canParry = false;
-            player.GetComponent<CharacterCombat>().parryCooldown = 500f;
             gameOverMenuUI.SetActive(true);
         }
     }

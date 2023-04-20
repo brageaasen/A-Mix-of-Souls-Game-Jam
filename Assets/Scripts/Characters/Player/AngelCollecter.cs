@@ -34,14 +34,19 @@ public class AngelCollecter : MonoBehaviour
         }
     }
 
+    public void Collect()
+    {
+        audioManager.Play("PickUp");
+        Destroy(ray.LookingAtGameObject());
+        IncrementAngelCount();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && (ray.LookingAt() == "Angel") && ray.LookingAtGameObject().GetComponent<NPC>().canBeCollected)
         {
-            audioManager.Play("PickUp");
-            Destroy(ray.LookingAtGameObject());
-            IncrementAngelCount();
+            Collect();
         }
     }
 }

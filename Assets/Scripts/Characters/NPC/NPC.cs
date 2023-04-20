@@ -15,6 +15,7 @@ public class NPC : MonoBehaviour
     private GameObject player;
     private RayCastMove ray;
     private PlayerController playerController;
+    private AngelCollecter angelCollecter;
 
     public float wordSpeed;
     public bool playerIsClose;
@@ -33,6 +34,7 @@ public class NPC : MonoBehaviour
         player = PlayerManager.instance.player;
         ray = player.GetComponent<RayCastMove>();
         playerController = player.GetComponent<PlayerController>();
+        angelCollecter = player.GetComponent<AngelCollecter>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class NPC : MonoBehaviour
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
+        angelCollecter.Collect();
     }
 
     IEnumerator Typing()

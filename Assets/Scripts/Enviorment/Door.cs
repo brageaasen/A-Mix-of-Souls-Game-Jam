@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
-    private bool open;
+    // Refrences
     private Animator animator;
     private GameObject player;
     private RayCastMove ray;
-
     private AudioManager audioManager;
+
+    private bool open;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +27,9 @@ public class Door : MonoBehaviour
     {
         if (ray.LookingAt() == this.tag)
         {
-            if (Input.GetKeyDown(KeyCode.F)) // And player has key
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if (player.GetComponent<Inventory>().keys > 0)
+                if (player.GetComponent<Inventory>().keys > 0) // Check if player has key
                 {
                     ray.LookingAtGameObject().GetComponent<Door>().OpenDoor();
                     player.GetComponent<Inventory>().DecrementCount("Key");
@@ -39,9 +39,10 @@ public class Door : MonoBehaviour
             }
         }
     }
+
     public void OpenDoor()
     {
-        if (open != true)
+        if (this.open != true)
         {
             this.open = true;
             this.animator.SetTrigger("OpenDoor");

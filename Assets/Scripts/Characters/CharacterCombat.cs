@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
+    // Refrences
     public Character currentCharacter;
     private Enemy enemy;
     private GameObject player;
+    private AudioManager audioManager;
 
+    // Inventory
     private Inventory inventory;
     public int potionGain = 40;
 
@@ -20,9 +23,6 @@ public class CharacterCombat : MonoBehaviour
     private float parryTimer;
     public bool canParry;
 
-    private AudioManager audioManager;
-
-    // Start is called before the first frame update
     void Start()
     {
         this.audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
@@ -35,12 +35,20 @@ public class CharacterCombat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) && this.tag == "Player")
+        {
             UsePotion(this.player.GetComponent<Character>());
+        }
 
         if (!canAttack)
         {
-            attackCooldown -= Time.deltaTime;
+            if (this.tag == "Enemy")
+            {
+                if (this.GetComponent<Enemy>().distance < this.GetComponent<Enemy>().navAgent.stoppingDistance)
+                    attackCooldown -= Time.deltaTime;
+            }
+            else
+                attackCooldown -= Time.deltaTime;
             if (attackCooldown <= 0f)
                 canAttack = true;
         }
@@ -49,21 +57,17 @@ public class CharacterCombat : MonoBehaviour
         {
             parryCooldown -= Time.deltaTime;
             if (parryCooldown <= 0f)
-            {
                 canParry = true;
-            }
         }
 
-        if (currentCharacter.isParrying && currentCharacter.tag == "Player")
+        if (currentCharacter.tag == "Player" && currentCharacter.isParrying)
         {
             parryTimer += Time.deltaTime;
             if (parryTimer > currentCharacter.parryDuration)
                 StopMeleeParry(currentCharacter);
         }
         else
-        {
             parryTimer = 0f;
-        }
     }
 
     public void MeleeAttack(Character targetCharacter)
@@ -135,6 +139,14 @@ public class CharacterCombat : MonoBehaviour
         targetCharacter.GetComponentInParent<CharacterCombat>().attackCooldown = 0f;
     }
 
+    /// <summary>
+    /// If character misses a parry, character gets an increased cooldown on next parry.
+    /// </summary>
+    public void UnSuccessfulParry(Character targetCharacter)
+    {
+        targetCharacter.GetComponentInParent<CharacterCombat>().parryCooldown = 6f;
+    }
+
     private void InvokeDisableFromEnemy()
     {
         enemy.DisableQuestionMark();
@@ -144,7 +156,8 @@ public class CharacterCombat : MonoBehaviour
     {
         if ((this.player.GetComponent<Inventory>().potions > 0) && (player.currentHealth < player.maxHealth))
         {
-            player.currentHealth += 40; // Change to variable potionGain
+            // player.currentHealth += this.potionGain;
+            player.currentHealth += 40;
             player.CheckHealth();
             this.player.GetComponent<Inventory>().DecrementCount("Potion");
             audioManager.Play("UsePotion");

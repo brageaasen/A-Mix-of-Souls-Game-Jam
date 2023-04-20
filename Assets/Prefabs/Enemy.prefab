@@ -734,6 +734,7 @@ MonoBehaviour:
   isParrying: 0
   parrySpeed: 1
   parryDuration: 1
+  canTakeDamage: 1
   isDead: 0
 --- !u!114 &795445707163303989
 MonoBehaviour:
@@ -749,8 +750,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCharacter: {fileID: 795445707163303988}
   potionGain: 0
-  attackCooldown: 0
-  canAttack: 1
+  attackCooldown: 1
+  canAttack: 0
+  parryCooldown: 0
   canParry: 0
 --- !u!114 &795445707163303986
 MonoBehaviour:
@@ -765,8 +767,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.2
+  navAgent: {fileID: 0}
   exclamationMark: {fileID: 795445706841282074}
   reactionTime: 1
+  distance: 0
   questionMark: {fileID: 795445706752926910}
 --- !u!195 &795445707163303991
 NavMeshAgent:

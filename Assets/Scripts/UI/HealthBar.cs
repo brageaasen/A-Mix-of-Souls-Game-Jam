@@ -8,20 +8,10 @@ public class HealthBar : MonoBehaviour
 
     [SerializeField] private CanvasGroup healthBarUIGroup;
 
+    [Header("Refrence Objects")]
     public Slider slider;
     public Gradient gradient;
     public Image fill;
-
-    
-    
-    void Update() {
-        //if (slider.value == slider.maxValue || slider.value == slider.minValue) {
-        //    healthBarUIGroup.alpha = 0;
-        //}
-        //else { 
-        //    healthBarUIGroup.alpha = 1;
-        //}
-    }
 
     public void SetMaxHealth(int health)
     {
@@ -30,6 +20,7 @@ public class HealthBar : MonoBehaviour
 
         fill.color = gradient.Evaluate(1f);
     }
+    
     public void SetHealth(int health)
     {
         slider.value = health;

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-
-    private bool open;
+    // Refrences
     private Animator animator;
     private GameObject player;
     private RayCastMove ray;
     private Inventory inventory;
+    private AudioManager audioManager;
+
+    private bool open;
     private int containsIndex = -1;
     [SerializeField] private float delay = 1f;
 
-    private AudioManager audioManager;
 
     public string[] contains;
 

@@ -14,10 +14,11 @@ public class Enemy : MonoBehaviour
 
     Character currentCharacter;
     CharacterCombat enemyCombat;
-    NavMeshAgent navAgent;
+    [HideInInspector] public NavMeshAgent navAgent;
 
     [SerializeField] private Image exclamationMark;
     public float reactionTime = 1f;
+    [HideInInspector] public float distance;
     [SerializeField] private Image questionMark;
 
     // Start is called before the first frame update
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
 
         }
 
-        float distance = Vector3.Distance(transform.position, player.transform.position);
+        distance = Vector3.Distance(transform.position, player.transform.position);
         
         if (Input.GetKeyDown(playerInput.attack))
         {
@@ -67,7 +68,7 @@ public class Enemy : MonoBehaviour
         }
     }
     
-    void OnDrawGizmos()
+    void OnDrawGizmos() // Gizmo for debug
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
