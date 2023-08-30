@@ -1,12 +1,8 @@
-# A Mix of Souls - Lovfall
-## [For a Dungeon-Crawler Game-Jam](https://itch.io/jam/dcjam2023)
-
 # Game Jam Solo Project: [A Mix of Souls]
 
 # Description
-## This short game was created in just one week for a game jam during the easter of 2023, and I'm excited to share it with you.
-
-## In [A Mix of Souls], you'll have to collect wrongly sorted angles who have arrived at the gates of hell (the theme of the jam was *duality*)
+This short game was created in just one week [for a game jam during the easter of 2023](https://itch.io/jam/dcjam2023), and I'm excited to share it with you.
+In [A Mix of Souls], you'll have to collect wrongly sorted angles who have arrived at the gates of hell (the theme of the jam was *duality*)
 The game had to follow the retro style of 19'th century dungeon crawler games.
 
 
