@@ -6,7 +6,7 @@ using TMPro;
 
 public class Fader : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private string fadeText;
 
     private float fadeTime;
@@ -30,7 +30,7 @@ public class Fader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ray.LookingAt() == this.tag && !fadedIn && canFade)
+        if (ray.LookingAt() == this.tag && !fadedIn && canFade) // Check if fader should fade in
         {
             // Text to be displayed
             if (ray.LookingAtGameObject().GetComponent<Fader>() != null)
@@ -38,7 +38,7 @@ public class Fader : MonoBehaviour
 
             FadeIn();
         }
-        else if (!(ray.LookingAt() == this.tag) && fadedIn)
+        else if (!(ray.LookingAt() == this.tag) && fadedIn) // Fade out if player not looking at gameobject
             FadeOut();
     }
 

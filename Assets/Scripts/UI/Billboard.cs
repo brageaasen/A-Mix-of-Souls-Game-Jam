@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    public Transform cam;
+    [SerializeField] private Transform cam;
 
-    // Make local transform follow camera
+    // Makes local transform follow camera like a billboard
     void LateUpdate()
     {
         transform.LookAt(transform.position + cam.forward);

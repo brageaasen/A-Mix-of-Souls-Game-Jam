@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class LevelChanger : MonoBehaviour
 {
     
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
     private int levelToLoad;
 

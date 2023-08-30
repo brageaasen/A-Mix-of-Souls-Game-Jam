@@ -7,11 +7,11 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public float timeValue = 90f;
-    public TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI timeText;
     private bool timerStarted;
 
     // Update is called once per frame
-    void Update()
+    void Update() // Decrement timer each second from start time
     {
         if (timeValue > 0 && timerStarted)
         {

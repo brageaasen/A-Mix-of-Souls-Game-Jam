@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameOverScreen : MonoBehaviour
 {
 
-    public GameObject gameOverMenuUI;
+    [SerializeField] private GameObject gameOverMenuUI;
 
     // Reference
     [SerializeField] private Character player;
-    private PlayerController playerController;
     [SerializeField] private Timer timer;
+    private PlayerController playerController;
     private AudioManager audioManager;
 
     void Start()
@@ -22,7 +22,7 @@ public class GameOverScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.isDead || (timer.GetTime() <= 0))
+        if (player.isDead || (timer.GetTime() <= 0)) // Check if lose conditions are met, if so, show game over screen and disable player
         {
             playerController.canMove = false;
             player.CanTakeDamage(false);

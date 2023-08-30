@@ -17,7 +17,7 @@ public class AttackUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() // Change canAttack/canParry UI to colors showing its availability
+    void Update() // Changes canAttack/canParry UI to colors showing its availability
     {
         if (player.GetComponent<CharacterCombat>().canAttack)
             this.attackText.color = new Color(1, 1, 1, 1);

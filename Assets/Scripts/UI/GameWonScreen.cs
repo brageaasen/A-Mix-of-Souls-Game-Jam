@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameWonScreen : MonoBehaviour
 {
 
-    public GameObject gameWonMenuUI;
+    [SerializeField] private GameObject gameWonMenuUI;
 
     // Reference
+    [SerializeField] private Timer timer;
     private GameObject player;
     private PlayerController playerController;
-    [SerializeField] private Timer timer;
     private AudioManager audioManager;
 
     void Start()
@@ -23,7 +23,7 @@ public class GameWonScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<AngelCollecter>().angels >= 10)
+        if (player.GetComponent<AngelCollecter>().angels >= 10) // Check if win conditions are met, if so, show game won screen and disable player
         {
             playerController.canMove = false;
             player.GetComponent<Character>().CanTakeDamage(false);

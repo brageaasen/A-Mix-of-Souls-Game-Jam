@@ -9,11 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     private bool canPause = true;
 
-    public GameObject pauseMenuUI;
-
-    [SerializeField] private GameObject gameOverMenuUI;
-    [SerializeField] private GameObject dialoguePanelUI;
-    [SerializeField] private GameObject NPC;
+    [SerializeField] private GameObject pauseMenuUI, gameOverMenuUI, dialoguePanelUI, NPC;
     private AudioManager audioManager;
 
     void Start()
@@ -25,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if (NPC != null)
-            canPause = !NPC.GetComponent<NPC>().isTalking;
+            canPause = !NPC.GetComponent<NPC>().isTalking; // Can only pause when not currently talking to NPC's
 
         if (Input.GetKeyDown(KeyCode.Escape) && (gameOverMenuUI.activeSelf == false) && ((gameOverMenuUI.activeSelf == false)) && canPause)
         {

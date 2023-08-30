@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
     private RayCastMove ray;
     private AudioManager audioManager;
 
-    private bool open;
+    [HideInInspector] public bool open;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,6 @@ public class Door : MonoBehaviour
                 if (player.GetComponent<Inventory>().keys > 0) // Check if player has key
                 {
                     ray.LookingAtGameObject().GetComponent<Door>().OpenDoor();
-                    player.GetComponent<Inventory>().DecrementCount("Key");
                 }
                 else
                     audioManager.Play("DoorLocked"); // Locked sound effect
@@ -47,6 +46,7 @@ public class Door : MonoBehaviour
             this.open = true;
             this.animator.SetTrigger("OpenDoor");
             this.audioManager.Play("Door");
+            player.GetComponent<Inventory>().DecrementCount("Key");
         }
     }
 }
