@@ -14,8 +14,8 @@ The game had to follow the retro style of 19'th century dungeon crawler games.
 
 # How to Play:
 Either:
-### Head over to my [itch.io](https://lovfall.itch.io/) page and play from your browser.
-### Or download the project and run it in your unity editor (I would recommend itch.io).
+- Head over to my [itch.io](https://lovfall.itch.io/) page and play from your browser.
+- Or download the project and run it in your unity editor (I would recommend itch.io).
 
 # Credits
 - Game Design and Development: [Lovfall]
